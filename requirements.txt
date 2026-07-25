@@ -1,0 +1,10 @@
+# Core (Part 1-3, if using OpenAI backend)
+openai>=1.0.0
+
+# Optional backends - uncomment what you need
+# google-generativeai
+# ollama
+
+# Part 4: RAG
+pypdf
+scikit-learn

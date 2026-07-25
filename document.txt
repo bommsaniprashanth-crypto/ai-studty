@@ -1,0 +1,33 @@
+Artificial Intelligence (AI) is the field of computer science focused on building
+systems that can perform tasks normally requiring human intelligence, such as
+understanding language, recognizing images, making decisions, and solving problems.
+
+Machine Learning (ML) is a subset of AI where systems learn patterns from data
+instead of being explicitly programmed with rules. Common types of machine
+learning include supervised learning, unsupervised learning, and reinforcement
+learning.
+
+Large Language Models (LLMs) are a type of AI model trained on massive amounts
+of text data. They can generate human-like text, answer questions, summarize
+documents, translate languages, and write code. Examples of LLMs include
+OpenAI's GPT models, Google's Gemini models, and open-source models that can
+run locally through tools like Ollama.
+
+Retrieval-Augmented Generation (RAG) is a technique that improves LLM answers
+by first retrieving relevant information from an external knowledge source,
+such as a document or database, and then feeding that retrieved information
+to the LLM along with the user's question. This helps the LLM give more
+accurate, up-to-date, and grounded answers instead of relying only on what it
+memorized during training.
+
+An AI agent is a system that can autonomously plan a sequence of steps to
+achieve a goal, execute those steps (possibly using external tools), and
+adjust its plan based on the results. Agentic AI systems are increasingly
+used for tasks like research assistants, coding assistants, and workflow
+automation.
+
+Prompt chaining is a technique where the output of one LLM call becomes part
+of the input to the next LLM call. This lets a complex task be broken into a
+sequence of smaller, more reliable steps, such as first summarizing text,
+then extracting key points from the summary, and finally generating
+questions from those key points.
