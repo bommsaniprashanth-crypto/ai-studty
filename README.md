@@ -1,160 +1,132 @@
-# SkillFlow Tracker 📊
+StudyOS: Agentic AI Academic Assistant
 
-A modern, animated personal progress tracker website for students to monitor their learning journey across multiple domains.
+StudyOS is a full-stack web application that brings a student's scattered study material into one personalized learning workflow. It combines PDF analysis, diagram understanding, YouTube lecture summarization, an AI tutor, flashcards, and roadmap generation, and it tracks progress so later recommendations adapt to the learner.
 
-## 🎯 Features
+Table of Contents
+Overview
+Features
+Architecture
+Tech Stack
+Getting Started
+Environment Variables
+Project Structure
+Usage
+Roadmap
+Contributing
+License
+Author
+Overview
 
-### Four Main Tracking Pages
+Students study from many places: lecture PDFs, handwritten diagrams, recorded videos, and online references. Most AI tools answer isolated questions but do not follow a student's progress or plan their study.
 
-1. **Dashboard** - Monthly progress overview
-   - Overall progress percentage with circular progress indicator
-   - Quick stats for books, coding hours, video projects, and skill growth
-   - Detailed category progress cards
-   - Motivational quotes
+StudyOS addresses this with an agentic loop. The agent interprets the student's goal, selects the right tool, executes it, observes the result, and records the outcome in a progress-tracking module. That history then personalizes future recommendations, deadlines, and study goals.
 
-2. **Video Editing & Design** - Creative skills tracker
-   - Premiere Pro / After Effects practice hours
-   - Canva / Figma design time
-   - Thumbnails and Reels editing projects
-   - Color grading practice
-   - Recent projects showcase
-   - Sticky reminder for daily practice
+Features
+Module	What it does
+Dashboard	Shows level and XP, course completion, daily goal, study streak, weekly goal, progress chart, upcoming deadlines, and AI recommendations.
+PDF Learning Engine	Upload lecture notes, textbooks, or papers (text-based or scanned, up to 50 MB) and turn them into a study toolkit. A library tracks how much of each file has been studied.
+Image & Diagram Analyzer	Upload diagrams, flowcharts, UML, or handwritten notes. The AI labels each component and explains it.
+YouTube Analyzer + Tutor	Paste a lecture URL to get timestamped notes, a full summary, and an AI-generated quiz.
+AI Roadmap Generator	Pick a track (Cybersecurity, Full Stack Dev, AI Engineering, Data Science, Cloud & DevOps) and get a milestone-based path with topics and resources.
+AI Tutor	A chat tutor available from every page through the top bar and a floating button.
+Flashcards	Generated from study material for quick revision.
+Progress Tracking	Records studied topics, quiz performance, and goal completion to personalize later recommendations.
+Architecture
+Student request
+      |
+      v
++-------------+     +-------------------------------+
+|  React UI   | --> |  Node.js / Express API        |
++-------------+     |                               |
+                    |  Agentic loop                 |
+                    |  1. Interpret goal            |
+                    |  2. Select tool               |
+                    |  3. Execute tool (Gemini)     |
+                    |  4. Observe result            |
+                    |  5. Record outcome            |
+                    +---------------+---------------+
+                                    |
+              +---------------------+---------------------+
+              |                                           |
+      Tools (PDF, image, YouTube,                  MongoDB
+      tutor, flashcards, roadmap)           (users, progress, library)
 
-3. **Books Tracker** - Reading progress monitor
-   - Books planned vs completed
-   - Total pages read
-   - Reading streak counter
-   - Individual book progress with animated bars
-   - Monthly reading goals
-   - Sticky reminder about reading benefits
+The agent chooses among these tools: PDF analysis, image and diagram analysis, YouTube lecture summarization, AI chat tutor, flashcard generation, and roadmap generation. Each outcome is saved so the progress module can personalize what comes next.
 
-4. **Coding Tracker** - Programming skills dashboard
-   - Problems solved across platforms
-   - Languages practiced (Python, Java, HTML/CSS/JS)
-   - Active projects with progress
-   - Recent problem-solving activity
-   - Weekly coding goals
-   - Sticky reminder for daily practice
+Tech Stack
+Frontend: React, Vite
+Backend: Node.js, Express
+Database: MongoDB
+AI: Google Gemini API (text and vision)
+Getting Started
+Prerequisites
+Node.js 18 or later
+MongoDB (local instance or MongoDB Atlas)
+A Google Gemini API key
+Installation
+bash
+# 1. Clone the repository
+git clone https://github.com/<your-username>/<your-repo>.git
+cd <your-repo>
 
-## 🎨 Design Features
+# 2. Install backend dependencies
+cd server
+npm install
 
-- **Soft Gradient Background** - Purple, pink, and blue gradients
-- **Glassmorphism Cards** - Modern frosted glass effect
-- **Smooth Animations** - Motion/Framer Motion powered transitions
-- **Hover Effects** - Interactive card transformations
-- **Responsive Design** - Works on desktop, tablet, and mobile
-- **Dark Mode Support** - Beautiful dark theme included
-- **Custom Scrollbar** - Gradient styled scrollbar
-- **Sticky Reminders** - Important motivational notes on each page
+# 3. Install frontend dependencies
+cd ../client
+npm install
+Run the app
+bash
+# Terminal 1: start the backend
+cd server
+npm run dev
 
-## 🛠️ Tech Stack
+# Terminal 2: start the frontend
+cd client
+npm run dev
 
-- **React 18** - UI framework
-- **React Router 7** - Client-side routing
-- **Motion (Framer Motion)** - Animation library
-- **Tailwind CSS 4** - Utility-first styling
-- **TypeScript** - Type safety
-- **Lucide React** - Icon library
-- **Vite** - Build tool
+The frontend runs at http://localhost:5173 by default.
 
-## 📂 Project Structure
+Environment Variables
 
-```
-src/
-├── app/
-│   ├── components/
-│   │   ├── CircularProgress.tsx    # Circular progress indicator
-│   │   ├── ProgressCard.tsx        # Progress tracking card
-│   │   ├── StatCard.tsx            # Statistics display card
-│   │   └── StickyReminder.tsx      # Motivational reminder card
-│   ├── pages/
-│   │   ├── Dashboard.tsx           # Main dashboard
-│   │   ├── VideoDesign.tsx         # Video & design tracker
-│   │   ├── Books.tsx               # Books reading tracker
-│   │   └── Coding.tsx              # Coding practice tracker
-│   └── App.tsx                     # Main app with routing
-└── styles/
-    ├── fonts.css                   # Font imports (Inter & Poppins)
-    ├── theme.css                   # Color theme variables
-    └── animations.css              # Custom animations
-```
+Create a .env file inside the server/ folder:
 
-## 🚀 Key Components
+env
+PORT=5000
+MONGODB_URI=mongodb://localhost:27017/studyos
+GEMINI_API_KEY=your_gemini_api_key
+JWT_SECRET=your_jwt_secret
 
-### CircularProgress
-Animated circular progress indicator with percentage display.
+Never commit your .env file. Make sure it is listed in .gitignore.
 
-### ProgressCard
-Card component showing progress toward a goal with animated progress bar.
+Project Structure
 
-### StatCard
-Display statistics with icons and trend information.
+Adjust this to match your actual folders.
 
-### StickyReminder
-Sticky positioned reminder cards with motivational messages.
-
-## 🎯 Usage
-
-Navigate between pages using the top navigation bar:
-- **Dashboard** - View overall monthly progress
-- **Video & Design** - Track creative skill development
-- **Books** - Monitor reading progress and goals
-- **Coding** - Track programming practice and projects
-
-Each page includes:
-- Real-time progress tracking
-- Visual progress indicators
-- Motivational reminders
-- Detailed breakdowns by category
-- Animated transitions
-
-## 🎨 Color Scheme
-
-### Light Mode
-- Background: Soft purple-pink gradient
-- Primary: Purple (#8b5cf6)
-- Accent: Pink (#ec4899)
-- Cards: White with shadows
-
-### Dark Mode
-- Background: Dark gray with purple tint
-- Primary: Light purple (#a78bfa)
-- Accent: Bright pink (#f472b6)
-- Cards: Dark gray with borders
-
-## 📱 Responsive Design
-
-The app is fully responsive with:
-- Mobile-first approach
-- Collapsible navigation on mobile
-- Grid layouts that adapt to screen size
-- Touch-friendly interactive elements
-
-## ✨ Animations
-
-- Fade-in animations on page load
-- Slide-in effects for cards
-- Progress bar fill animations
-- Hover scale transformations
-- Smooth page transitions
-
-## 🎓 Perfect For
-
-- Students tracking multiple skills
-- Self-learners managing progress
-- Anyone building consistent habits
-- People who love data visualization
-- Motivation seekers
-
-## 📝 Customization
-
-You can easily customize:
-- Color schemes in `theme.css`
-- Progress goals and targets
-- Motivational messages
-- Tracked skills and categories
-- Animation timing and effects
-
----
-
-**Built with care for students who want to track their growth journey!** 🚀
+.
+├── client/                 # React frontend
+│   └── src/
+│       ├── pages/          # Dashboard, PDF, Image, YouTube, Roadmap, Progress, Settings
+│       ├── components/
+│       └── ...
+├── server/                 # Express backend
+│   ├── routes/
+│   ├── controllers/
+│   ├── agent/              # Agentic loop and tool definitions
+│   ├── models/             # MongoDB schemas
+│   └── ...
+└── README.md
+Usage
+Open the app and sign in.
+Upload a PDF in PDF Learning, or paste a lecture link in YouTube + Tutor.
+Use Image Analyzer for diagrams and handwritten notes.
+Ask the AI Tutor questions from any page.
+Pick a track in Roadmap to plan your study path.
+Check Progress to see your streak, goals, and recommendations.
+Roadmap
+ User study to evaluate learning outcomes
+ Spaced-repetition scheduling for flashcards
+ Support for more video and document sources
+ Exportable study reports
+Contributing
